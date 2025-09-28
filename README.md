@@ -18,7 +18,10 @@ JAVA开发工具包
 └─smarttool-swagger-gateway               -- Swagger 网关模块  
 └─smarttool-core                          -- 核心包       
 └─smarttool-minio                         -- minio模块   
-└─smarttool-aliyun-oss                    -- 阿里云OSS模块   
+└─smarttool-aliyun-oss                    -- 阿里云OSS模块  
+└─smarttool-retry                         -- 重试模块
+└─smarttool-redis-lock                    -- 分布式锁模块
+ 
 ```
 
 ## 2. 使用说明

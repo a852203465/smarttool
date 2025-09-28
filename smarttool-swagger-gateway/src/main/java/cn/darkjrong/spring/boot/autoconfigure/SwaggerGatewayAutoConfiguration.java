@@ -1,5 +1,6 @@
 package cn.darkjrong.spring.boot.autoconfigure;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2021/07/09
  */
 @Configuration
+@EnableConfigurationProperties({CustomGatewayProperties.class, CustomZuulProperties.class})
 @ComponentScan("cn.darkjrong.swagger.geteway")
 public class SwaggerGatewayAutoConfiguration {
 

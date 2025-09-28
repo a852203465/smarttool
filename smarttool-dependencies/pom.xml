@@ -94,6 +94,11 @@
                 <artifactId>smarttool-aliyun-oss</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.darkjrong</groupId>
+                <artifactId>smarttool-retry</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

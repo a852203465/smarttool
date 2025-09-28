@@ -1,5 +1,6 @@
 package cn.darkjrong.spring.boot.autoconfigure;
 
+import cn.darkjrong.core.enums.ErrorEnum;
 import cn.hutool.core.lang.Assert;
 import cn.darkjrong.mail.EmailTemplate;
 import org.slf4j.Logger;
@@ -52,17 +53,17 @@ public class EmailFactoryBean implements FactoryBean<EmailTemplate>, Initializin
     public void afterPropertiesSet() {
 
         Assert.notBlank(emailProperties.getHost(),
-                String.format(ExceptionEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getValue(), "host"));
+                String.format(ErrorEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getMessage(), "host"));
 
         Assert.notNull(emailProperties.getPort(),
-                String.format(ExceptionEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getValue(), "port"));
+                String.format(ErrorEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getMessage(), "port"));
 
         if (!emailProperties.getAvoidAuthEnable()) {
             Assert.notBlank(emailProperties.getUsername(),
-                    String.format(ExceptionEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getValue(), "username"));
+                    String.format(ErrorEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getMessage(), "username"));
 
             Assert.notBlank(emailProperties.getPassword(),
-                    String.format(ExceptionEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getValue(), "password"));
+                    String.format(ErrorEnum.THE_PROPERTY_CANNOT_BE_EMPTY.getMessage(), "password"));
         }
 
         emailTemplate = new EmailTemplate(emailProperties);
