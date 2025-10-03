@@ -147,6 +147,11 @@
                 <artifactId>tianai-captcha-springboot-starter</artifactId>
                 <version>1.5.2</version>
             </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.20.0</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
