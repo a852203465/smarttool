@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "i18n")
+@ConfigurationProperties(prefix = "stl.i18n")
 public class I18nProperties {
 
 	/**
