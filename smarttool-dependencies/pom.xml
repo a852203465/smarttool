@@ -109,6 +109,11 @@
                 <artifactId>smarttool-i18n</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.darkjrong</groupId>
+                <artifactId>smarttool-redis-limit</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

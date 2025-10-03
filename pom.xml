@@ -39,6 +39,7 @@
         <module>smarttool-retry</module>
         <module>smarttool-captcha</module>
         <module>smarttool-i18n</module>
+        <module>smarttool-redis-limit</module>
     </modules>
 
     <properties>
