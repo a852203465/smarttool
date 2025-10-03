@@ -4,6 +4,7 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import cn.darkjrong.autoconfigure.escape.StringEscapeEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.support.DefaultFormattingConversionService;
@@ -36,6 +37,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * 对get,form 去除字符串前后空格
      */
     @Bean
+    @ConditionalOnProperty(prefix = "stl.trim", name = "enabled", havingValue = "true")
     public ConfigurableWebBindingInitializer configurableWebBindingInitializer() {
         ConfigurableWebBindingInitializer initializer = new ConfigurableWebBindingInitializer();
         FormattingConversionService conversionService = new DefaultFormattingConversionService();

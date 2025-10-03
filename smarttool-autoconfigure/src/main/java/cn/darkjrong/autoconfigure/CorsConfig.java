@@ -33,9 +33,9 @@ public class CorsConfig {
     private static final String SPRING_VERSION = "2.4.0";
 
     /**
-     *  是否开启， 默认：false
+     *  是否开启,默认：false
      */
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     /**
      * web flux 跨域

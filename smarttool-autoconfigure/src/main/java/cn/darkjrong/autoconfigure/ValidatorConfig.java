@@ -16,23 +16,21 @@ import javax.validation.ValidatorFactory;
  * @date 2021/12/20
  */
 @Configuration
-public class ValidConfig {
+public class ValidatorConfig {
 
     @Bean
     public Validator validator() {
-
         ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)
                 .configure()
-                .addProperty("hibernate.validator.fail_fast", "true")
+                .failFast(true)
+//                .addProperty("hibernate.validator.fail_fast", "true")
                 .buildValidatorFactory();
         return validatorFactory.getValidator();
     }
 
 //    @Bean
     public MethodValidationPostProcessor methodValidationPostProcessor() {
-
         MethodValidationPostProcessor postProcessor = new MethodValidationPostProcessor();
-
         // 设置validator模式为快速失败返回
         postProcessor.setValidator(validator());
         return postProcessor;

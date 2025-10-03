@@ -2,6 +2,7 @@ package cn.darkjrong.autoconfigure;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "stl.task.executor")
+@ConditionalOnProperty(prefix = "stl.task.executor", name = "enabled", havingValue = "true")
 public class TaskExecutorConfig {
+
+    /**
+     *  是否开启，默认：false
+     */
+    private boolean enabled = false;
 
     /**
      * 核心数

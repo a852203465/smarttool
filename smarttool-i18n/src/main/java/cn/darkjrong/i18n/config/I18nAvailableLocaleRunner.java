@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
  * @date 2025/10/03
  */
 @Slf4j
-@Component
+//@Component
 @AllArgsConstructor
 public class I18nAvailableLocaleRunner implements ApplicationRunner {
 

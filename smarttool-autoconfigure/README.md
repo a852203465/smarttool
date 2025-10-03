@@ -40,15 +40,35 @@ stl:
 ```yaml
 stl:
   scheduled:
-    enabled: true  # 是否开启，默认：true
+    enabled: true  # 是否开启
     pool-size: 10
 ```
 
+#### 1.2.4 跨域
+```yaml
+stl:
+  cors:
+    enabled: true  # 是否开启
+```
 
+#### 1.2.5 任务执行器
+```yaml
+stl:
+  task:
+    executor:
+      enabled: true   # 必须为true, 否则不会生效
+      core-pool-size: 10  
+      max-pool-size: 10    
+      keep-alive-seconds: 10
+      queue-capacity: 100
+```
 
-
-
-
+#### 1.2.6 参数去除前后空格
+```yaml
+stl:
+  trim:
+    enabled: true
+```
 
 
 

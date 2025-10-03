@@ -24,7 +24,7 @@ public class ScheduledConfig {
     /**
      * 是否开启，默认：false
      */
-    private boolean enabled = Boolean.TRUE;
+    private boolean enabled = false;
 
     /**
      * 线程池个数，默认：10

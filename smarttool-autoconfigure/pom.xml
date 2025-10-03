@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>smarttool-autoconfigure</artifactId>
-
     <description>自动配置模块</description>
 
     <properties>

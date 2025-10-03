@@ -1,5 +1,7 @@
 package cn.darkjrong.autoconfigure;
 
+import cn.darkjrong.autoconfigure.escape.StringTrimDeserializer;
+import cn.darkjrong.spring.boot.autoconfigure.TrimStringProperties;
 import cn.hutool.core.util.CharsetUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.Feature;
@@ -9,7 +11,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import cn.darkjrong.autoconfigure.escape.StringTrimDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +33,9 @@ import static cn.hutool.core.util.CharsetUtil.UTF_8;
 @Configuration
 @ConditionalOnClass(JSON.class)
 public class HttpMessageConverterConfig {
+
+    @Autowired
+    private TrimStringProperties trimStringProperties;
 
     /**
      * http消息转换器。
@@ -63,12 +68,14 @@ public class HttpMessageConverterConfig {
                 SerializerFeature.DisableCircularReferenceDetect
         );
 
-        fastJsonConfig.setFeatures(Feature.TrimStringFieldValue, Feature.UseNativeJavaObject);
-        ParserConfig parserConfig = ParserConfig.getGlobalInstance();
-        parserConfig.putDeserializer(String.class, new StringTrimDeserializer());
+        if (trimStringProperties.isEnabled()) {
+            fastJsonConfig.setFeatures(Feature.TrimStringFieldValue, Feature.UseNativeJavaObject);
+            ParserConfig parserConfig = ParserConfig.getGlobalInstance();
+            parserConfig.putDeserializer(String.class, new StringTrimDeserializer());
 //        parserConfig.putDeserializer(Object.class, new StringTrimDeserializer());
 
 //        fastJsonConfig.setParserConfig(parserConfig);
+        }
 
         // 3.在converter中添加配置信息
         fastConverter.setFastJsonConfig(fastJsonConfig);
