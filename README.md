@@ -25,6 +25,7 @@ JAVA开发工具包
 └─smarttool-redis-lock                    -- 分布式锁模块
 └─smarttool-captcha                       -- 验证码模块
 └─smarttool-i18n                          -- 多语言模块
+└─smarttool-redis-limit                   -- redis限流模块
 
  
  
