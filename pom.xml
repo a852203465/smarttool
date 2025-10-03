@@ -7,7 +7,7 @@
     <groupId>cn.darkjrong</groupId>
     <artifactId>smarttool</artifactId>
     <packaging>pom</packaging>
-    <version>6.3.0</version>
+    <version>6.4.0</version>
 
     <description>JAVA开发工具包</description>
 
