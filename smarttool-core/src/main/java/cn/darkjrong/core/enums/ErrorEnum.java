@@ -90,9 +90,10 @@ public enum ErrorEnum implements ExceptionEnum {
     TARGET_OBJECT_CANNOT_BE_EMPTY(10000, "target object cannot be empty"),
     THE_OBJECT_COLLECTION_CANNOT_BE_EMPTY(10000, "The object collection cannot be empty"),
     VERSION_STATE_CANNOT_BE_EMPTY(10000, "bucket version state cannot be empty"),
-
-
-
+    THE_SLIDER_IMAGE_FILE_DOES_NOT_EXIST(10000, "滑块验证码图为空,请检查"),
+    THE_SLIDER_VERIFICATION_CODE_GENERATION_IS_ABNORMAL(10000, "滑块验证码生成异常,请重试"),
+    THE_VERIFICATION_CODE_IS_OUT_OF_DATE_PLEASE_GET_A_NEW_ONE(10000, "验证码过时,请点击'换一张'"),
+    THE_VERIFICATION_CODE_IS_INCORRECT(10000, "验证码不正确"),
 
 
 

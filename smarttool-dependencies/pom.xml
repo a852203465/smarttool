@@ -99,6 +99,11 @@
                 <artifactId>smarttool-retry</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.darkjrong</groupId>
+                <artifactId>smarttool-captcha</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

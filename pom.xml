@@ -37,6 +37,7 @@
         <module>smarttool-redis-lock</module>
         <module>smarttool-aliyun-oss</module>
         <module>smarttool-retry</module>
+        <module>smarttool-captcha</module>
     </modules>
 
     <properties>
@@ -140,7 +141,11 @@
                 <artifactId>guava-retrying3</artifactId>
                 <version>3.0.6</version>
             </dependency>
-
+            <dependency>
+                <groupId>cloud.tianai.captcha</groupId>
+                <artifactId>tianai-captcha-springboot-starter</artifactId>
+                <version>1.5.2</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
