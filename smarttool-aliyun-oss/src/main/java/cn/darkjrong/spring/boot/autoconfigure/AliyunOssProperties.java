@@ -2,7 +2,7 @@ package cn.darkjrong.spring.boot.autoconfigure;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 阿里云OSS属性
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2024/08/12
  */
 @Data
-@Component
+@Configuration
 @ConfigurationProperties(prefix = "stl.aliyun.oss")
 public class AliyunOssProperties {
 

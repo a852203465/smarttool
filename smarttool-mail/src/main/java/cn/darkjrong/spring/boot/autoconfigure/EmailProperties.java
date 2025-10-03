@@ -4,7 +4,7 @@ import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 电子邮件属性
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @date 2021/07/26 11:22:30
  */
 @Data
-@Component
+@Configuration
 @ConfigurationProperties(prefix = "stl.email")
 public class EmailProperties {
 

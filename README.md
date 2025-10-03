@@ -1,6 +1,8 @@
 # smarttool 
 JAVA开发工具包
 
+该工具包不为重复造轮子,只为把项目中相同配置封装起来,好用的框架集中
+
 ## 1. 模块说明
 ```text
 ├─smarttool-autoconfigure                 -- 自动配置模块                    

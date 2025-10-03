@@ -2,7 +2,7 @@ package cn.darkjrong.spring.boot.autoconfigure;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * minio属性
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2021/08/03 22:31:18
  */
 @Data
-@Component
+@Configuration
 @ConfigurationProperties(prefix = "stl.minio")
 public class MinioProperties {
 

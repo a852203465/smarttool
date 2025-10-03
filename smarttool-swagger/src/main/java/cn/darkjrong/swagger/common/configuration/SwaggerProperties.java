@@ -5,6 +5,7 @@ import cn.darkjrong.swagger.common.enums.ScanMatchingRuleEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,6 +19,7 @@ import java.util.Map;
  * @date 2021/12/20
  */
 @Data
+@Configuration
 @ConfigurationProperties(prefix = "stl.swagger")
 public class SwaggerProperties {
 

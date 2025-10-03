@@ -1,8 +1,8 @@
 package cn.darkjrong.swagger.common.configuration;
 
+import cn.darkjrong.swagger.common.utils.SwaggerUtils;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.darkjrong.swagger.common.utils.SwaggerUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -33,7 +32,6 @@ import java.util.Map;
  */
 @Configuration
 @AllArgsConstructor
-@EnableConfigurationProperties(SwaggerProperties.class)
 public class DocketInfoConfiguration implements BeanFactoryAware {
 
     private static final String DEFAULT_BASE_PATH = "/**";

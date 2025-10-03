@@ -4,7 +4,6 @@ import cn.darkjrong.swagger.common.configuration.SwaggerProperties;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
@@ -18,7 +17,6 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 @Configuration
 @AllArgsConstructor
 @ConditionalOnClass({WebFluxConfigurer.class})
-@EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerWebFluxAutoConfiguration {
 
     private final SwaggerProperties swaggerProperties;

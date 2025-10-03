@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.gateway.route.RouteDefinition;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2022/10/07
  */
 @Data
-@Component
+@Configuration
 @ConditionalOnClass({WebFluxConfigurer.class})
 @ConfigurationProperties("spring.cloud.gateway")
 public class CustomGatewayProperties {
