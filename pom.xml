@@ -40,6 +40,7 @@
         <module>smarttool-captcha</module>
         <module>smarttool-i18n</module>
         <module>smarttool-redis-limit</module>
+        <module>smarttool-xxl-job</module>
     </modules>
 
     <properties>
@@ -153,6 +154,22 @@
                 <artifactId>commons-io</artifactId>
                 <version>2.20.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>2.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy</artifactId>
+                <version>4.0.10</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.zhxu</groupId>
+                <artifactId>okhttps-fastjson</artifactId>
+                <version>4.1.0</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

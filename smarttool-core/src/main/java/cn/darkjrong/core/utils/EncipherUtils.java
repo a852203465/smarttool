@@ -32,7 +32,7 @@ public class EncipherUtils {
             String base64 = IoUtil.read(inputStream, CharsetUtil.CHARSET_UTF_8);
             rsa = SecureUtil.rsa(null, Base64.decode(base64));
         } catch (Exception e) {
-            log.error("**********,xdc-saas,The encryption key is incorrectly loaded");
+            log.error("**********,The encryption key is incorrectly loaded", e);
             throw new StlRuntimeException(e);
         }
     }

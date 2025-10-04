@@ -26,6 +26,7 @@ JAVA开发工具包
 └─smarttool-captcha                       -- 验证码模块
 └─smarttool-i18n                          -- 多语言模块
 └─smarttool-redis-limit                   -- redis限流模块
+└─smarttool-xxl-job                       -- XXL-JOB
 
  
  
@@ -74,7 +75,7 @@ JAVA开发工具包
 | 6.1.3 | `smarttool-exceptions`增加捕获`ConstraintViolationException`                                                                                                                      |
 | 6.2.0 | 简化`smarttool-exceptions`,把其他放入core中                                                                                                                                           |
 | 6.3.0 | 增加`smarttool-aliyun-oss`模块,删除`smarttool-xxl-job`模块                                                                                                                            |
-| 6.4.0 | 增加`smarttool-redis-limit`,`smarttool-retry`, `smarttool-i18n`, `smarttool-captcha`模块,优化`smarttool-autoconfigure`模块,支持小于Spring Boot 3.0                                        |
+| 6.4.0 | 增加`smarttool-redis-limit`,`smarttool-retry`, `smarttool-i18n`, `smarttool-captcha`, `smarttool-xxl-job`模块,优化`smarttool-autoconfigure`模块,支持小于Spring Boot 3.0                   |
 
 
 

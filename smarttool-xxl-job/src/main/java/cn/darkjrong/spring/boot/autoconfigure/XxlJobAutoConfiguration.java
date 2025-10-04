@@ -1,0 +1,30 @@
+package cn.darkjrong.spring.boot.autoconfigure;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * xxl-job 自动配置
+ *
+ * @author Rong.Jia
+ * @date 2023/01/11
+ */
+@ComponentScan("cn.darkjrong.xxljob")
+@Configuration
+@EnableConfigurationProperties({XxlJobProperties.class})
+@ConditionalOnProperty(prefix = "stl.xxl-job", name = "enabled", havingValue = "true")
+public class XxlJobAutoConfiguration {
+
+
+
+
+
+
+
+
+
+
+
+}

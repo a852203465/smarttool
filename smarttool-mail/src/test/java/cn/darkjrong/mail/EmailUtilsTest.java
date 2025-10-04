@@ -26,23 +26,23 @@ public class EmailUtilsTest {
     static {
 
         EmailTo to = new EmailTo();
-        to.setMail("rong.jia@xdcplus.com");
-        to.setName("贾荣1");
+        to.setMail("2111@qq.com");
+        to.setName("aa");
         toList.add(to);
 
         EmailTo cc = new EmailTo();
-        cc.setMail("martin.ji@xdcplus.com");
-        cc.setName("嵇浩");
+        cc.setMail("2111@qq.com");
+        cc.setName("aa");
         ccList.add(cc);
 
         EmailTo bcc = new EmailTo();
-        bcc.setMail("fish.fei@xdcplus.com");
-        bcc.setName("费戌辉");
+        bcc.setMail("2111@qq.com");
+        bcc.setName("aa");
         bccList.add(bcc);
 
         EmailTo reply = new EmailTo();
-        reply.setMail("black.hua@xdcplus.com");
-        reply.setName("华俊龙");
+        reply.setMail("2111@qq.com");
+        reply.setName("aa");
         replyList.add(reply);
 
         EmailProperties emailProperties = new EmailProperties();
@@ -53,7 +53,7 @@ public class EmailUtilsTest {
         emailProperties.setSslEnable(Boolean.TRUE);
         emailProperties.setDebug(Boolean.FALSE);
         emailProperties.setName("贾荣");
-        emailProperties.setUsername("852203465@qq.com");
+        emailProperties.setUsername("2111@qq.com");
         emailProperties.setPassword("lenuiyivrybsbbbi");
 
         emailTemplate = new EmailTemplate(emailProperties);
