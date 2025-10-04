@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -130,21 +129,25 @@ public class AutoRegistryThread extends BaseTaskThread {
                 //自动注册
                 if (executeMethod.isAnnotationPresent(XxlJobRegister.class)) {
                     XxlJobRegister xxlRegister = executeMethod.getAnnotation(XxlJobRegister.class);
+                    XxlJobInfo xxlJobInfo = createXxlJobInfo(xxlJobGroup, xxlJob, xxlRegister);
+
                     List<XxlJobInfo> jobInfo = jobInfoService.getJobInfo(xxlJobGroup.getId(), xxlJob.value());
-                    if (CollUtil.isNotEmpty(jobInfo)){
+                    if (CollUtil.isNotEmpty(jobInfo)) {
                         //因为是模糊查询，需要再判断一次
-                        Optional<XxlJobInfo> first = jobInfo.stream()
-                                .filter(xxlJobInfo -> xxlJobInfo.getExecutorHandler().equals(xxlJob.value()))
-                                .findFirst();
-                        if (first.isPresent()) {
-                            log.info("job-group 【{}】register xxl-job 【{}】 success!", xxlJobGroup.getAppname(), xxlJob.value());
-                            continue;
+                        XxlJobInfo first = jobInfo.stream()
+                                .filter(a -> a.getExecutorHandler().equals(xxlJob.value()))
+                                .findFirst().orElse(null);
+                        if (ObjectUtil.isNotNull(first)) {
+                            xxlJobInfo.setId(first.getId());
+                            if (jobInfoService.updateJobInfo(xxlJobInfo)) {
+                                log.info("job-group【{}】job-info【{}】Change register xxl-job success!", xxlJobGroup.getAppname(), xxlJob.value());
+                            }
+                        }
+                    } else {
+                        if (jobInfoService.addJobInfo(xxlJobInfo)) {
+                            log.info("job-group【{}】job-info【{}】register xxl-job success!", xxlJobGroup.getAppname(), xxlJobInfo.getExecutorHandler());
                         }
                     }
-
-                    XxlJobInfo xxlJobInfo = createXxlJobInfo(xxlJobGroup, xxlJob, xxlRegister);
-                    jobInfoService.addJobInfo(xxlJobInfo);
-                    log.info("job-group 【{}】register xxl-job 【{}】 success!", xxlJobGroup.getAppname(), xxlJobInfo.getExecutorHandler());
                 }
             }
         }

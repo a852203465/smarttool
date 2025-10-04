@@ -68,4 +68,19 @@ public class XxlJobInfoServiceImpl implements XxlJobInfoService {
         return JSON.parseObject(res).getInteger("code").equals(200);
     }
 
+    @Override
+    public Boolean updateJobInfo(XxlJobInfo xxlJobInfo) {
+        String url = xxlJobProperties.getAdmin().getAddresses() + UrlEnum.JOB_UPDATE.getValue();
+        Map<String, Object> paramMap = BeanUtil.beanToMap(xxlJobInfo);
+
+        String cookie = xxlJobLoginService.getCookie();
+        String res = HttpUtils.sync(url)
+                .addBodyPara(paramMap)
+                .addHeader("Cookie", cookie)
+                .post()
+                .getBody()
+                .toString();
+        return JSON.parseObject(res).getInteger("code").equals(200);
+    }
+
 }

@@ -13,20 +13,28 @@ import java.util.List;
 public interface XxlJobInfoService {
 
     /**
-     * 获取工作信息
+     * 获取任务信息
      *
-     * @param jobGroupId      工作组ID
+     * @param jobGroupId      任务组ID
      * @param executorHandler 遗嘱执行人处理程序
      * @return {@link List}<{@link XxlJobInfo}>
      */
     List<XxlJobInfo> getJobInfo(Integer jobGroupId, String executorHandler);
 
     /**
-     * 添加工作信息
+     * 添加任务信息
      *
-     * @param xxlJobInfo xxl工作信息
+     * @param xxlJobInfo xxl任务信息
      * @return {@link Boolean }
      */
     Boolean addJobInfo(XxlJobInfo xxlJobInfo);
+
+    /**
+     * 修改任务信息
+     *
+     * @param xxlJobInfo xxl任务信息
+     * @return {@link Boolean }
+     */
+    Boolean updateJobInfo(XxlJobInfo xxlJobInfo);
 
 }
