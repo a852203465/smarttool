@@ -119,6 +119,11 @@
                 <artifactId>smarttool-xxl-job</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.darkjrong</groupId>
+                <artifactId>smarttool-xss</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
