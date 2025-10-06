@@ -2,12 +2,9 @@ package cn.darkjrong.spring.boot.autoconfigure;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -19,7 +16,7 @@ import java.util.Set;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "stl.wrapper")
-public class RequestWrapperProperties {
+public class BodyCacheProperties {
 
     /**
      *  是否开启，默认：false
@@ -27,18 +24,8 @@ public class RequestWrapperProperties {
     private boolean enabled = false;
 
     /**
-     * 排序
+     * 需要包装的URL模式。
      */
-    private Integer order;
-
-    private String name = "extend-filter";
-
-    private Map<String, String> initParameters = new LinkedHashMap<>();
-
-    private Set<String> servletNames = new LinkedHashSet<>();
-
-    private Set<ServletRegistrationBean<?>> servletRegistrationBeans = new LinkedHashSet<>();
-
     private Set<String> urlPatterns = new LinkedHashSet<>();
 
 
