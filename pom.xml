@@ -41,6 +41,8 @@
         <module>smarttool-redis-limit</module>
         <module>smarttool-xxl-job</module>
         <module>smarttool-xss</module>
+        <module>smarttool-captcha</module>
+        <module>smarttool-wrapper</module>
     </modules>
 
     <properties>
