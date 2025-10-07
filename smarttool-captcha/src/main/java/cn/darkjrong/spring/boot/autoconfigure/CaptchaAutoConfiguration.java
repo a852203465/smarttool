@@ -29,8 +29,8 @@ public class CaptchaAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public CaptchaStore captchaStore(CaptchaProperties captchaProperties) {
-        return new MemoryCaptchaStore(captchaProperties);
+    public CaptchaStore captchaStore() {
+        return new MemoryCaptchaStore();
     }
 
 

@@ -161,6 +161,8 @@ stl:
     width: 300
     # 验证码位数
     length: 3
+    # 过期时长
+    exp-duration: 5m
     # 文本组合类型
     text-type: type_num_and_upper
     font:
@@ -217,48 +219,26 @@ private CaptchaTemplate captchaTemplate;
 ```java
 @Slf4j
 @Component
-public class RedisCaptchaStore implements CaptchaStore {
+public class RedisCaptchaStore extends AbstractCaptchaStore {
 
-    private final CaptchaProperties captchaProperties;
+    @Autowired
+    private RedisUtils redisUtils;
 
-    public RedisCaptchaStore(CaptchaProperties captchaProperties) {
-        this.captchaProperties = captchaProperties;
+    @Override
+    public void store(String captchaId, String value, Duration expDuration) {
+        redisUtils.setEx(captchaId, value, expDuration.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public void store(String captchaId, String value) {
-        // 存Redis
+    public void remove(String captchaId) {
+        redisUtils.delete(captchaId);
     }
 
     @Override
-    public Boolean verify(String captchaId, String value) {
-        List<CaptchaType> captchaTypes = CaptchaType.preciseType();
-        boolean match = captchaTypes.stream()
-                .anyMatch(type -> type.equals(captchaProperties.getType()));
-        
-        // 从redis获取
-        String correctAnswer = captchaStorage.get(captchaId);
-        if (StrUtil.isBlank(correctAnswer)) {
-            log.error("验证码ID【{}】的答案为空", captchaId);
-            return Boolean.FALSE;
-        }
-
-        if (match) {
-            if (!StrUtil.equals(value, correctAnswer)) {
-                log.error("验证码ID【{}】输入【{}】答案【{}】不一致", captchaId, value, correctAnswer);
-                return Boolean.FALSE;
-            }
-        } else  {
-            Double xPos = Double.parseDouble(value);
-            Double vCode = Double.parseDouble(correctAnswer);
-            if (xPos - vCode > 5 || xPos - vCode < - 5) {
-                log.error("验证码ID【{}】输入【{}】答案【{}】验证不通过", captchaId, xPos, vCode);
-                return Boolean.FALSE;
-            }
-        }
-        captchaStorage.remove(captchaId);
-        return Boolean.TRUE;
+    public String get(String captchaId) {
+        return Convert.toStr(redisUtils.get(captchaId));
     }
+
 }
 ```
 ## 5.自定义效果
