@@ -8,14 +8,12 @@ import cn.darkjrong.captcha.uitls.FontUtils;
 import cn.darkjrong.captcha.uitls.Randoms;
 import cn.darkjrong.spring.boot.autoconfigure.CaptchaProperties;
 import cn.hutool.core.codec.Base64;
-import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
 import lombok.Getter;
 
 import java.awt.*;
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.QuadCurve2D;
-import java.io.OutputStream;
 
 /**
  * 抽象验证码
@@ -67,19 +65,6 @@ public abstract class AbstractCaptcha implements Captcha {
         return captchaCode;
     }
 
-    @Override
-    public CaptchaCode out(OutputStream out) {
-        alphas();
-        outImg();
-        CaptchaCode captchaCode = new CaptchaCode();
-        captchaCode.setCaptchaId(IdUtil.fastSimpleUUID());
-        captchaCode.setSrcImg(toBase64());
-        captchaCode.setText(chars);
-        captchaCode.setContentType(getContentType());
-        IoUtil.write(out, Boolean.TRUE, image);
-        return captchaCode;
-    }
-
     /**
      * 生成随机验证码
      */
@@ -127,6 +112,10 @@ public abstract class AbstractCaptcha implements Captcha {
 
     protected String toBase64() {
         return "data:image/png;base64," + Base64.encode(image);
+    }
+
+    protected String toBase64(byte[] bytes) {
+        return "data:image/png;base64," + Base64.encode(bytes);
     }
 
     /**

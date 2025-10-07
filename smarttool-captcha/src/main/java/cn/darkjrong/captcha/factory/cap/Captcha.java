@@ -3,8 +3,6 @@ package cn.darkjrong.captcha.factory.cap;
 import cn.darkjrong.captcha.domain.CaptchaCode;
 import cn.darkjrong.captcha.enums.CaptchaType;
 
-import java.io.OutputStream;
-
 /**
  * 验证码
  *
@@ -28,13 +26,6 @@ public interface Captcha {
      */
     CaptchaCode out();
 
-    /**
-     * 验证码输出
-     *
-     * @param out 输出流
-     * @return {@link CaptchaCode }
-     */
-    CaptchaCode out(OutputStream out);
 
 
 

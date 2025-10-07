@@ -20,6 +20,7 @@ public enum CaptchaType {
     ChineseGif,
     Gif,
     Spec,
+    Slider,
 
 
 

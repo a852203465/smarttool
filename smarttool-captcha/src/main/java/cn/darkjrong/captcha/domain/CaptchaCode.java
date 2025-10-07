@@ -33,12 +33,12 @@ public class CaptchaCode {
     /**
      *  宽
      */
-    private Double xWidth;
+    private Integer xWidth;
 
     /**
      *  高
      */
-    private Double yHeight;
+    private Integer yHeight;
 
     /**
      * 图片类型

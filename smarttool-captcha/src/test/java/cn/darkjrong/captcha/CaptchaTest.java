@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 @Slf4j
 public class CaptchaTest {
@@ -41,7 +40,7 @@ public class CaptchaTest {
 	@Test
 	public void testMath() throws FileNotFoundException {
 		ArithmeticCaptcha captcha = new ArithmeticCaptcha(captchaProperties);
-		CaptchaCode captchaCode = captcha.out(new FileOutputStream(getPath("math.png")));
+		CaptchaCode captchaCode = captcha.out();
 		log.info("text {}", captchaCode.getText());
 	}
 	@Test
@@ -52,7 +51,7 @@ public class CaptchaTest {
 			font.setSize(32f);
 			captchaProperties.setFont(font);
 			SpecCaptcha specCaptcha = new SpecCaptcha(captchaProperties);
-			CaptchaCode captchaCode = specCaptcha.out(new FileOutputStream(getPath(+i + "1.png")));
+			CaptchaCode captchaCode = specCaptcha.out();
 			log.info(captchaCode.getText());
 		}
 	}
@@ -66,7 +65,7 @@ public class CaptchaTest {
 			font.setSize(32f);
 			captchaProperties.setFont(font);
 			GifCaptcha gifCaptcha = new GifCaptcha(captchaProperties);
-			CaptchaCode captchaCode = gifCaptcha.out(new FileOutputStream(getPath(+i + "2.gif")));
+			CaptchaCode captchaCode = gifCaptcha.out();
 			log.info(captchaCode.getText());
 		}
 	}
@@ -75,7 +74,7 @@ public class CaptchaTest {
 	public void testHan() throws Exception {
 		for (int i = 0; i < 1; i++) {
 			ChineseCaptcha chineseCaptcha = new ChineseCaptcha(captchaProperties);
-			CaptchaCode captchaCode = chineseCaptcha.out(new FileOutputStream(getPath(+i + "3.png")));
+			CaptchaCode captchaCode = chineseCaptcha.out();
 			log.info(captchaCode.getText());
 		}
 	}
@@ -84,7 +83,7 @@ public class CaptchaTest {
 	public void testGifHan() throws Exception {
 		for (int i = 0; i < 1; i++) {
 			ChineseGifCaptcha chineseGifCaptcha = new ChineseGifCaptcha(captchaProperties);
-			CaptchaCode captchaCode = chineseGifCaptcha.out(new FileOutputStream(getPath(+i + "4.gif")));
+			CaptchaCode captchaCode = chineseGifCaptcha.out();
 			log.info(captchaCode.getText());
 		}
 	}
@@ -103,14 +102,10 @@ public class CaptchaTest {
 			algorithm.setDifficulty(50);
 			captchaProperties.setArithmetic(algorithm);
 			ArithmeticCaptcha specCaptcha = new ArithmeticCaptcha(captchaProperties);
-			CaptchaCode captchaCode = specCaptcha.out(new FileOutputStream(getPath(+i + "5.png")));
+			CaptchaCode captchaCode = specCaptcha.out();
 			log.info(specCaptcha.getCalculationFormula() + " " + captchaCode.getText());
 		}
 	}
 
-
-	private static String getPath(String name) {
-		return "G:/a/" + name;
-	}
 
 }
