@@ -84,7 +84,7 @@ public class CaptchaProperties {
         private ArithmeticType algorithm = ArithmeticType.ADD_SUB_MUL_DIV;
 
         /**
-         * 难度,默认：10,最小:1
+         * 难度,默认：10
          */
         private Integer difficulty = 10;
 

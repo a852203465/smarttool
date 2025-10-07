@@ -1,22 +1,18 @@
 # 验证码模块
-
-![MavenCentral](https://img.shields.io/maven-central/v/com.github.whvcse/easy-captcha?style=flat-square)
-![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?style=flat-square)
-
-
-## 1.简介
 Java图形验证码，支持gif、中文、算术等类型，可用于Java Web、JavaSE等项目。
 
----
+## 1.效果展示
 
-## 2.效果展示
+**普通类型：**
 
 ![验证码](https://s2.ax1x.com/2019/08/23/msFrE8.png) 
 &emsp;&emsp;
 ![验证码](https://s2.ax1x.com/2019/08/23/msF0DP.png)
 &emsp;&emsp;
 ![验证码](https://s2.ax1x.com/2019/08/23/msFwut.png)
-<br/>
+
+**Gif类型：**
+
 ![验证码](https://s2.ax1x.com/2019/08/23/msFzVK.gif) 
 &emsp;&emsp;
 ![验证码](https://s2.ax1x.com/2019/08/23/msFvb6.gif)
@@ -47,109 +43,151 @@ Java图形验证码，支持gif、中文、算术等类型，可用于Java Web�
 &emsp;&emsp;
 ![验证码](https://s2.ax1x.com/2019/08/23/msAkYF.png)
 
----
-
-## 4.使用方法
-
-### 4.1.设置宽高和位数
+## 2.使用方法
+### 2.1引入依赖
+```xml
+<dependencies>
+    <dependency>
+        <groupId>cn.darkjrong</groupId>
+        <artifactId>smarttool-captcha</artifactId>
+        <version>${latestversion}</version>
+    </dependency>
+</dependencies>
+```
+### 2.2 Maven工程环境
 ```java
-@Controller
-public class CaptchaController {
-    
-    @RequestMapping("/captcha")
-    public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 设置位数
-        CaptchaUtil.out(5, request, response);
-        // 设置宽、高、位数
-        CaptchaUtil.out(130, 48, 5, request, response);
-        
-        // 使用gif验证码
-        GifCaptcha gifCaptcha = new GifCaptcha(130,48,4);
-        CaptchaUtil.out(gifCaptcha, request, response);
-    }
+@Slf4j
+public class CaptchaTest {
+
+	private static final Integer DEFAULT_IMAGE_WIDTH = 200;
+	private static final Integer DEFAULT_IMAGE_HEIGHT = 60;
+	private static CaptchaProperties captchaProperties;
+
+	@BeforeEach
+	public void init() {
+		captchaProperties = new CaptchaProperties();
+		captchaProperties.setHeight(100);
+		captchaProperties.setWidth(300);
+		CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
+		captchaProperties.setFont(font);
+	}
+
+	@Test
+	public void testMath() throws FileNotFoundException {
+		ArithmeticCaptcha captcha = new ArithmeticCaptcha(captchaProperties);
+		CaptchaCode captchaCode = captcha.out(new FileOutputStream(getPath("math.png")));
+		log.info("text {}", captchaCode.getText());
+	}
+	@Test
+	public void test() throws Exception {
+		for (int i = 0; i < 1; i++) {
+			CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
+			font.setFontType(FontType.Action_Jackson);
+			font.setSize(32f);
+			captchaProperties.setFont(font);
+			SpecCaptcha specCaptcha = new SpecCaptcha(captchaProperties);
+			CaptchaCode captchaCode = specCaptcha.out(new FileOutputStream(getPath(+i + "1.png")));
+			log.info(captchaCode.getText());
+		}
+	}
+
+	@Test
+	public void testGIf() throws Exception {
+		for (int i = 0; i < 1; i++) {
+			CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
+			captchaProperties.setLength(5);
+			font.setFontType(FontType.Action_Jackson);
+			font.setSize(32f);
+			captchaProperties.setFont(font);
+			GifCaptcha gifCaptcha = new GifCaptcha(captchaProperties);
+			CaptchaCode captchaCode = gifCaptcha.out(new FileOutputStream(getPath(+i + "2.gif")));
+			log.info(captchaCode.getText());
+		}
+	}
+
+	@Test
+	public void testHan() throws Exception {
+		for (int i = 0; i < 1; i++) {
+			ChineseCaptcha chineseCaptcha = new ChineseCaptcha(captchaProperties);
+			CaptchaCode captchaCode = chineseCaptcha.out(new FileOutputStream(getPath(+i + "3.png")));
+			log.info(captchaCode.getText());
+		}
+	}
+
+	@Test
+	public void testGifHan() throws Exception {
+		for (int i = 0; i < 1; i++) {
+			ChineseGifCaptcha chineseGifCaptcha = new ChineseGifCaptcha(captchaProperties);
+			CaptchaCode captchaCode = chineseGifCaptcha.out(new FileOutputStream(getPath(+i + "4.gif")));
+			log.info(captchaCode.getText());
+		}
+	}
+
+	@Test
+	public void testArit() throws Exception {
+		for (int i = 0; i < 1; i++) {
+			CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
+			captchaProperties.setLength(3);
+			font.setFontType(FontType.Action_Jackson);
+			font.setSize(28f);
+			captchaProperties.setFont(font);
+
+			CaptchaProperties.ArithmeticAlgorithm algorithm = new CaptchaProperties.ArithmeticAlgorithm();
+			algorithm.setAlgorithm(ArithmeticType.ADD_SUB_MUL_DIV);
+			algorithm.setDifficulty(50);
+			captchaProperties.setArithmetic(algorithm);
+			ArithmeticCaptcha specCaptcha = new ArithmeticCaptcha(captchaProperties);
+			CaptchaCode captchaCode = specCaptcha.out(new FileOutputStream(getPath(+i + "5.png")));
+			log.info(specCaptcha.getCalculationFormula() + " " + captchaCode.getText());
+		}
+	}
+
+	private static String getPath(String name) {
+		return "G:/a/" + name;
+	}
+
 }
 ```
-
-### 4.2.不使用工具类
-&emsp;CaptchaUtil封装了输出验证码、存session、判断验证码等功能，也可以不使用此工具类：
-
-```java
-@Controller
-public class CaptchaController {
-    
-    @RequestMapping("/captcha")
-    public void captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // 设置请求头为输出图片类型
-        response.setContentType("image/gif");
-        response.setHeader("Pragma", "No-cache");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setDateHeader("Expires", 0);
-        
-        // 三个参数分别为宽、高、位数
-        SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
-        // 设置字体
-        specCaptcha.setFont(new Font("Verdana", Font.PLAIN, 32));  // 有默认字体，可以不用设置
-        // 设置类型，纯数字、纯字母、字母数字混合
-        specCaptcha.setCharType(Captcha.TYPE_ONLY_NUMBER);
-        
-        // 验证码存入session
-        request.getSession().setAttribute("captcha", specCaptcha.text().toLowerCase());
-        
-        // 输出图片流
-        specCaptcha.out(response.getOutputStream());
-    }
-    
-    @PostMapping("/login")
-    public JsonResult login(String username,String password,String verCode){
-        // 获取session中的验证码
-        String sessionCode = request.getSession().getAttribute("captcha");
-        // 判断验证码
-        if (verCode==null || !sessionCode.equals(verCode.trim().toLowerCase())) {
-            return JsonResult.error("验证码不正确");
-        }
-    }  
-}
+### 2.3 Spring Boot环境
+#### 2.3.1 配置参数(application.properties) yml配置
+```yaml
+stl:
+  captcha:
+    # 验证码类型
+    type: arithmetic
+    # 验证码图片高
+    height: 100
+    # 验证码图片宽
+    width: 300
+    # 验证码位数
+    length: 3
+    # 文本组合类型
+    text-type: type_num_and_upper
+    font:
+      # 字体类型
+      font-type: action_jackson
+      # 字体大小
+      size: 32
+    arithmetic:
+      # 算术算法
+      algorithm: add_sub_mul_div
+      # 难度,默认：10
+      difficulty: 10
 ```
 
-## 5.更多设置
-
-### 5.1.验证码类型
-
+#### 2.3.2 API调用
 ```java
-public class Test {
-    
-    public static void main(String[] args) {
-        // png类型
-        SpecCaptcha captcha = new SpecCaptcha(130, 48);
-        captcha.text();  // 获取验证码的字符
-        captcha.textChar();  // 获取验证码的字符数组
-        
-        // gif类型
-        GifCaptcha captcha = new GifCaptcha(130, 48);
-        
-        // 中文类型
-        ChineseCaptcha captcha = new ChineseCaptcha(130, 48);
-        
-        // 中文gif类型
-        ChineseGifCaptcha captcha = new ChineseGifCaptcha(130, 48);
-        
-        // 算术类型
-        ArithmeticCaptcha captcha = new ArithmeticCaptcha(130, 48);
-        captcha.setLen(3);  // 几位数运算，默认是两位
-        captcha.getArithmeticString();  // 获取运算的公式：3+2=?
-        captcha.text();  // 获取运算的结果：5
-        
-        captcha.out(outputStream);  // 输出验证码
-    }
-}
+@Autowired
+private CaptchaTemplate captchaTemplate;
 ```
 
+## 3.更多设置
+### 3.1验证码类型
 > 注意：<br/>
 > &emsp;算术验证码的len表示是几位数运算，而其他验证码的len表示验证码的位数，算术验证码的text()表示的是公式的结果，
 > 对于算术验证码，你应该把公式的结果存储session，而不是公式。
 
-### 5.2.验证码字符类型
-
+### 3.2验证码字符类型
  类型 | 描述 
  :--- | :--- 
  TYPE_DEFAULT | 数字和字母混合 
@@ -159,17 +197,9 @@ public class Test {
  TYPE_ONLY_LOWER | 纯小写字母
  TYPE_NUM_AND_UPPER | 数字和大写字母
 
-使用方法：
-```
-SpecCaptcha captcha = new SpecCaptcha(130, 48, 5);
-captcha.setCharType(Captcha.TYPE_ONLY_NUMBER);
-```
-
 > 只有`SpecCaptcha`和`GifCaptcha`设置才有效果。
 
-### 5.3.字体设置
-内置字体：
-
+### 3.3字体设置
  字体 | 效果 
  :--- | :--- 
  Captcha.FONT_1 |  ![](https://s2.ax1x.com/2019/08/23/msMe6U.png)
@@ -183,96 +213,53 @@ captcha.setCharType(Captcha.TYPE_ONLY_NUMBER);
  Captcha.FONT_9 | ![](https://s2.ax1x.com/2019/08/23/msMVpV.png)
  Captcha.FONT_10 | ![](https://s2.ax1x.com/2019/08/23/msMZlT.png)
 
-使用方法：
-```
-SpecCaptcha captcha = new SpecCaptcha(130, 48, 5);
-
-// 设置内置字体
-captcha.setFont(Captcha.FONT_1); 
-
-// 设置系统字体
-captcha.setFont(new Font("楷体", Font.PLAIN, 28)); 
-```
-
-### 5.4.输出base64编码
-```
-SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
-specCaptcha.toBase64();
-
-// 如果不想要base64的头部data:image/png;base64,
-specCaptcha.toBase64("");  // 加一个空的参数即可
-```
-
-### 5.5.输出到文件
-```
-FileOutputStream outputStream = new FileOutputStream(new File("C:/captcha.png"))
-SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
-specCaptcha.out(outputStream);
-```
-
----
-
-## 6.前后端分离项目的使用
-
-&emsp;前后端分离项目建议不要存储在session中，存储在redis中，redis存储需要一个key，key一同返回给前端用于验证输入：
+## 4.自定义实现验证码存储(Redis)
 ```java
-@Controller
-public class CaptchaController {
-    @Autowired
-    private RedisUtil redisUtil;
-    
-    @ResponseBody
-    @RequestMapping("/captcha")
-    public JsonResult captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
-        String verCode = specCaptcha.text().toLowerCase();
-        String key = UUID.randomUUID().toString();
-        // 存入redis并设置过期时间为30分钟
-        redisUtil.setEx(key, verCode, 30, TimeUnit.MINUTES);
-        // 将key和base64返回给前端
-        return JsonResult.ok().put("key", key).put("image", specCaptcha.toBase64());
+@Slf4j
+@Component
+public class RedisCaptchaStore implements CaptchaStore {
+
+    private final CaptchaProperties captchaProperties;
+
+    public RedisCaptchaStore(CaptchaProperties captchaProperties) {
+        this.captchaProperties = captchaProperties;
     }
-    
-    @ResponseBody
-    @PostMapping("/login")
-    public JsonResult login(String username,String password,String verCode,String verKey){
-        // 获取redis中的验证码
-        String redisCode = redisUtil.get(verKey);
-        // 判断验证码
-        if (verCode==null || !redisCode.equals(verCode.trim().toLowerCase())) {
-            return JsonResult.error("验证码不正确");
+
+    @Override
+    public void store(String captchaId, String value) {
+        // 存Redis
+    }
+
+    @Override
+    public Boolean verify(String captchaId, String value) {
+        List<CaptchaType> captchaTypes = CaptchaType.preciseType();
+        boolean match = captchaTypes.stream()
+                .anyMatch(type -> type.equals(captchaProperties.getType()));
+        
+        // 从redis获取
+        String correctAnswer = captchaStorage.get(captchaId);
+        if (StrUtil.isBlank(correctAnswer)) {
+            log.error("验证码ID【{}】的答案为空", captchaId);
+            return Boolean.FALSE;
         }
-    }  
+
+        if (match) {
+            if (!StrUtil.equals(value, correctAnswer)) {
+                log.error("验证码ID【{}】输入【{}】答案【{}】不一致", captchaId, value, correctAnswer);
+                return Boolean.FALSE;
+            }
+        } else  {
+            Double xPos = Double.parseDouble(value);
+            Double vCode = Double.parseDouble(correctAnswer);
+            if (xPos - vCode > 5 || xPos - vCode < - 5) {
+                log.error("验证码ID【{}】输入【{}】答案【{}】验证不通过", captchaId, xPos, vCode);
+                return Boolean.FALSE;
+            }
+        }
+        captchaStorage.remove(captchaId);
+        return Boolean.TRUE;
+    }
 }
 ```
-前端使用ajax获取验证码：
-```html
-<img id="verImg" width="130px" height="48px"/>
-
-<script>
-    var verKey;
-    // 获取验证码
-    $.get('/captcha', function(res) {
-        verKey = res.key;
-        $('#verImg').attr('src', res.image);
-    },'json');
-    
-    // 登录
-    $.post('/login', {
-        verKey: verKey,
-        verCode: '8u6h',
-        username: 'admin'，
-        password: 'admin'
-    }, function(res) {
-        console.log(res);
-    }, 'json');
-</script>
-```
-
----
-
-## 7.自定义效果
-
-&emsp;继承`Captcha`实现`out`方法，中文验证码可继承`AbstractChineseCaptcha`，算术验证码可继承`AbstractArithmeticCaptcha`。
-
----
+## 5.自定义效果
+中文验证码可继承`AbstractChineseCaptcha`，算术验证码可继承`AbstractArithmeticCaptcha`。
