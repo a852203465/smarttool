@@ -69,75 +69,73 @@ public class CaptchaTest {
         CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
         captchaProperties.setFont(font);
     }
-    
+
     @Test
-    public void testMath() throws FileNotFoundException {
+    public void testMath() {
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(captchaProperties);
         CaptchaCode captchaCode = captcha.out();
         log.info("text {}", captchaCode.getText());
     }
     @Test
-    public void test() throws Exception {
-        for (int i = 0; i < 1; i++) {
-            CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
-            font.setFontType(FontType.Action_Jackson);
-            font.setSize(32f);
-            captchaProperties.setFont(font);
-            SpecCaptcha specCaptcha = new SpecCaptcha(captchaProperties);
-            CaptchaCode captchaCode = specCaptcha.out();
-            log.info(captchaCode.getText());
-        }
+    public void test() {
+        CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
+        font.setFontType(FontType.Action_Jackson);
+        font.setSize(32f);
+        captchaProperties.setFont(font);
+        SpecCaptcha specCaptcha = new SpecCaptcha(captchaProperties);
+        CaptchaCode captchaCode = specCaptcha.out();
+        log.info(captchaCode.getText());
     }
 
     @Test
-    public void testGIf() throws Exception {
-        for (int i = 0; i < 1; i++) {
-            CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
-            captchaProperties.setLength(5);
-            font.setFontType(FontType.Action_Jackson);
-            font.setSize(32f);
-            captchaProperties.setFont(font);
-            GifCaptcha gifCaptcha = new GifCaptcha(captchaProperties);
-            CaptchaCode captchaCode = gifCaptcha.out();
-            log.info(captchaCode.getText());
-        }
+    public void testGIf() {
+        CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
+        captchaProperties.setLength(5);
+        font.setFontType(FontType.Action_Jackson);
+        font.setSize(32f);
+        captchaProperties.setFont(font);
+        GifCaptcha gifCaptcha = new GifCaptcha(captchaProperties);
+        CaptchaCode captchaCode = gifCaptcha.out();
+        log.info(captchaCode.getText());
     }
 
     @Test
-    public void testHan() throws Exception {
-        for (int i = 0; i < 1; i++) {
-            ChineseCaptcha chineseCaptcha = new ChineseCaptcha(captchaProperties);
-            CaptchaCode captchaCode = chineseCaptcha.out();
-            log.info(captchaCode.getText());
-        }
+    public void testHan() {
+        ChineseCaptcha chineseCaptcha = new ChineseCaptcha(captchaProperties);
+        CaptchaCode captchaCode = chineseCaptcha.out();
+        log.info(captchaCode.getText());
     }
 
     @Test
-    public void testGifHan() throws Exception {
-        for (int i = 0; i < 1; i++) {
-            ChineseGifCaptcha chineseGifCaptcha = new ChineseGifCaptcha(captchaProperties);
-            CaptchaCode captchaCode = chineseGifCaptcha.out();
-            log.info(captchaCode.getText());
-        }
+    public void testGifHan() {
+        ChineseGifCaptcha chineseGifCaptcha = new ChineseGifCaptcha(captchaProperties);
+        CaptchaCode captchaCode = chineseGifCaptcha.out();
+        log.info(captchaCode.getText());
     }
 
     @Test
-    public void testArit() throws Exception {
-        for (int i = 0; i < 1; i++) {
-            CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
-            captchaProperties.setLength(3);
-            font.setFontType(FontType.Action_Jackson);
-            font.setSize(28f);
-            captchaProperties.setFont(font);
+    public void testArit() {
+        CaptchaProperties.FontProperties font = new CaptchaProperties.FontProperties();
+        captchaProperties.setLength(3);
+        font.setFontType(FontType.Action_Jackson);
+        font.setSize(28f);
+        captchaProperties.setFont(font);
 
-            CaptchaProperties.ArithmeticAlgorithm algorithm = new CaptchaProperties.ArithmeticAlgorithm();
-            algorithm.setAlgorithm(ArithmeticType.ADD_SUB_MUL_DIV);
-            algorithm.setDifficulty(50);
-            captchaProperties.setArithmetic(algorithm);
-            ArithmeticCaptcha specCaptcha = new ArithmeticCaptcha(captchaProperties);
-            CaptchaCode captchaCode = specCaptcha.out();
-            log.info(specCaptcha.getCalculationFormula() + " " + captchaCode.getText());
-        }
+        CaptchaProperties.ArithmeticAlgorithm algorithm = new CaptchaProperties.ArithmeticAlgorithm();
+        algorithm.setAlgorithm(ArithmeticType.ADD_SUB_MUL_DIV);
+        algorithm.setDifficulty(50);
+        captchaProperties.setArithmetic(algorithm);
+        ArithmeticCaptcha specCaptcha = new ArithmeticCaptcha(captchaProperties);
+        CaptchaCode captchaCode = specCaptcha.out();
+        log.info(specCaptcha.getCalculationFormula() + " " + captchaCode.getText());
+    }
+
+    @Test
+    public void testSlider() {
+        captchaProperties.setType(CaptchaType.Slider);
+        SliderCaptcha sliderCaptcha = new SliderCaptcha(captchaProperties);
+        CaptchaCode captchaCode = sliderCaptcha.out();
+        log.info(captchaCode.getText());
     }
 
 
