@@ -138,6 +138,20 @@ public class CaptchaTest {
         log.info(captchaCode.getText());
     }
 
+    @Test
+    public void testClickWord() {
+        CaptchaProperties.ClickWord clickWord = new CaptchaProperties.ClickWord();
+        clickWord.setClickCount(6);
+        clickWord.setFontColorRandom(true);
+        captchaProperties.setClickWord(clickWord);
+        captchaProperties.setType(CaptchaType.ClickWord);
+        ClickWordCaptcha clickWordCaptcha = new ClickWordCaptcha(captchaProperties);
+        CaptchaCode captchaCode = clickWordCaptcha.out();
+        log.info(captchaCode.getText());
+        log.info(JSON.toJSONString(captchaCode.getPoints()));
+        FileUtil.writeBytes(Base64.decode(captchaCode.getSrcImg()), "G:/a/1.jpg");
+    }
+    
 
 }
 ```
@@ -168,6 +182,9 @@ stl:
       algorithm: add_sub_mul_div
       # 难度,默认：10
       difficulty: 10
+    click-word:
+      click-count: 4
+      font-color-random: true
 ```
 
 #### 2.3.2 API调用

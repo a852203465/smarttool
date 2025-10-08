@@ -1,6 +1,7 @@
 package cn.darkjrong.captcha.uitls;
 
 import cn.darkjrong.captcha.enums.FontType;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -112,7 +113,14 @@ public class FontUtils {
         return font.deriveFont(size);
     }
 
-
+    /**
+     * 随机
+     *
+     * @return {@link Font }
+     */
+    public static Font random() {
+        return FONTS.get(RandomUtil.randomInt(FONTS.size()));
+    }
 
 
 }

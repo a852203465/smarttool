@@ -2,6 +2,8 @@ package cn.darkjrong.captcha.domain;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 验证码信息
  * @author Rong.Jia
@@ -45,8 +47,10 @@ public class CaptchaCode {
      */
     private String contentType;
 
-
-
+    /**
+     * 坐标
+     */
+    private List<CaptchaPoint> points;
 
 
 

@@ -21,7 +21,7 @@ public enum CaptchaType {
     Gif,
     Spec,
     Slider,
-
+    ClickWord,
 
 
 

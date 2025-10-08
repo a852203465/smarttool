@@ -31,11 +31,9 @@ import java.util.Random;
  */
 @Slf4j
 @Component
-public class SliderCaptcha extends AbstractCaptcha {
+public class SliderCaptcha extends AbstractImgCaptcha {
 
     private static final int BOLD = 5;
-    private static final String IMG_FILE_TYPE = "jpg";
-    private static final String TEMP_IMG_FILE_TYPE = "png";
     private static final List<String> IMG_SUFFIX = Arrays.asList("jpg", "jpeg", "png", "gif");
     private static final List<byte[]> cutList = new ArrayList<>();
     private static final List<byte[]> srcList = new ArrayList<>();
@@ -78,7 +76,7 @@ public class SliderCaptcha extends AbstractCaptcha {
                 }
             }
         } catch (IOException e) {
-            log.error(String.format("**************,Slider,原图【%s】加载异常,【%s】", cuts, e.getMessage()), e);
+            log.error(String.format("**************,Slider,原图【%s】加载异常,【%s】", srcs, e.getMessage()), e);
         }
     }
 
@@ -89,11 +87,6 @@ public class SliderCaptcha extends AbstractCaptcha {
     @Override
     public Boolean support(CaptchaType type) {
         return CaptchaType.Slider.equals(type);
-    }
-
-    @Override
-    public String getContentType() {
-        return "image/png";
     }
 
     @Override
@@ -111,11 +104,6 @@ public class SliderCaptcha extends AbstractCaptcha {
         captchaCode.setText(Convert.toStr(slider.xWidth));
         captchaCode.setContentType(getContentType());
         return captchaCode;
-    }
-
-    @Override
-    protected byte[] drawImg(char[] chars) {
-        return null;
     }
 
     /**
@@ -166,8 +154,8 @@ public class SliderCaptcha extends AbstractCaptcha {
         graphics.drawImage(newImage, 0, 0, null);
         graphics.dispose();
 
-        byte[] newImageByte = ImgUtil.toBytes(newImage, TEMP_IMG_FILE_TYPE);
-        byte[] oriImageByte = ImgUtil.toBytes(oriImage, IMG_FILE_TYPE);
+        byte[] newImageByte = ImgUtil.toBytes(newImage, ImgUtil.IMAGE_TYPE_PNG);
+        byte[] oriImageByte = ImgUtil.toBytes(oriImage, ImgUtil.IMAGE_TYPE_JPG);
 
         Slider slider = new Slider();
         slider.setSrc(oriImageByte);
@@ -175,34 +163,6 @@ public class SliderCaptcha extends AbstractCaptcha {
         slider.setXWidth(widthRandom);
         slider.setYHeight(heightRandom);
         return slider;
-    }
-
-    /**
-     * 添加水印
-     * @param oriImage 图片
-     */
-    private static BufferedImage addWatermark(BufferedImage oriImage) {
-
-        Graphics2D graphics2D = oriImage.createGraphics();
-
-        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-
-        // 设置水印文字颜色
-        graphics2D.setColor(Color.BLUE);
-
-        // 设置水印文字
-        graphics2D.setFont(new java.awt.Font("宋体", java.awt.Font.BOLD, 50));
-
-        //设置水印文字透明度
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 0.5f));
-
-        // 第一参数->设置的内容，后面两个参数->文字在图片上的坐标位置(x,y)
-        graphics2D.drawString("zhoujin@qq.com", 400, 300);
-        graphics2D.dispose();
-
-        //释放
-        return oriImage;
     }
 
     /**

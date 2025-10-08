@@ -111,11 +111,11 @@ public abstract class AbstractCaptcha implements Captcha {
     protected abstract byte[] drawImg(char[] chars);
 
     protected String toBase64() {
-        return "data:image/png;base64," + Base64.encode(image);
+        return Base64.encode(image);
     }
 
     protected String toBase64(byte[] bytes) {
-        return "data:image/png;base64," + Base64.encode(bytes);
+        return Base64.encode(bytes);
     }
 
     /**

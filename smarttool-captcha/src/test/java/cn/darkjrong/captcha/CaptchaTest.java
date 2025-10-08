@@ -7,6 +7,9 @@ import cn.darkjrong.captcha.enums.FontType;
 import cn.darkjrong.captcha.factory.cap.*;
 import cn.darkjrong.captcha.uitls.FontUtils;
 import cn.darkjrong.spring.boot.autoconfigure.CaptchaProperties;
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.io.FileUtil;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -104,7 +107,20 @@ public class CaptchaTest {
 		CaptchaCode captchaCode = sliderCaptcha.out();
 		log.info(captchaCode.getText());
 	}
-	
+
+	@Test
+	public void testClickWord() {
+		CaptchaProperties.ClickWord clickWord = new CaptchaProperties.ClickWord();
+		clickWord.setClickCount(6);
+		clickWord.setFontColorRandom(true);
+		captchaProperties.setClickWord(clickWord);
+		captchaProperties.setType(CaptchaType.ClickWord);
+		ClickWordCaptcha clickWordCaptcha = new ClickWordCaptcha(captchaProperties);
+		CaptchaCode captchaCode = clickWordCaptcha.out();
+		log.info(captchaCode.getText());
+		log.info(JSON.toJSONString(captchaCode.getPoints()));
+		FileUtil.writeBytes(Base64.decode(captchaCode.getSrcImg()), "G:/a/1.jpg");
+	}
 	
 	
 	

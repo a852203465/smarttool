@@ -60,6 +60,11 @@ public class CaptchaProperties {
      */
     private ArithmeticAlgorithm arithmetic = new ArithmeticAlgorithm();
 
+    /**
+     * 文字点选
+     */
+    private ClickWord clickWord = new ClickWord();
+
     @Data
     public static class FontProperties {
 
@@ -93,6 +98,36 @@ public class CaptchaProperties {
             return difficulty <= 0 ? 10 : difficulty;
         }
     }
+
+    @Data
+    public static class ClickWord {
+
+        /**
+         * 点选文字个数,默认:4
+         */
+        private Integer clickCount = 4;
+
+        /**
+         * 字体颜色是否随机,默认:true
+         */
+        private Boolean fontColorRandom = Boolean.TRUE;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

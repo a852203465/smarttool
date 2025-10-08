@@ -1,15 +1,19 @@
 package cn.darkjrong.captcha.uitls;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 中文工具类
@@ -55,7 +59,29 @@ public class ChineseUtils {
     }
 
 
+    /**
+     * 随机汉字
+     *
+     * @param size 数量
+     * @return {@link List }<{@link String }>
+     */
+    public static List<String> random(Integer size) {
+        Set<String> words = new HashSet<>();
+        do {
+            String t = HAN_ZIS.get(RandomUtil.randomInt(HAN_ZIS.size()));
+            words.add(t);
+        } while (words.size() < size);
+        return CollUtil.newArrayList(words);
+    }
 
+    /**
+     * 个数
+     *
+     * @return {@link Integer }
+     */
+    public static Integer size() {
+        return HAN_ZIS.size();
+    }
 
 
 
