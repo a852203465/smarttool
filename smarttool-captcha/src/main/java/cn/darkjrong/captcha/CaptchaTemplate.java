@@ -1,10 +1,12 @@
 package cn.darkjrong.captcha;
 
 import cn.darkjrong.captcha.domain.CaptchaCode;
+import cn.darkjrong.captcha.enums.CaptchaType;
 import cn.darkjrong.captcha.factory.cap.CaptchaFactory;
 import cn.darkjrong.captcha.factory.store.CaptchaStore;
 import cn.darkjrong.spring.boot.autoconfigure.CaptchaProperties;
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,7 +35,10 @@ public class CaptchaTemplate {
         CaptchaCode captcha = captchaFactory.getCaptcha();
         String uuid = IdUtil.fastSimpleUUID();
         captcha.setCaptchaId(uuid);
-        captchaStore.store(uuid, captcha.getText());
+        String value = captchaProperties.getType().equals(CaptchaType.ClickWord)
+                ? JSON.toJSONString(captcha.getPoints())
+                : captcha.getText();
+        captchaStore.store(uuid, value);
         return captcha;
     }
 

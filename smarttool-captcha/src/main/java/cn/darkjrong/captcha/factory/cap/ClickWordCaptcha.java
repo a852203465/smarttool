@@ -7,6 +7,7 @@ import cn.darkjrong.captcha.uitls.ChineseUtils;
 import cn.darkjrong.captcha.uitls.FontUtils;
 import cn.darkjrong.spring.boot.autoconfigure.CaptchaProperties;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
@@ -118,10 +119,11 @@ public class ClickWordCaptcha extends AbstractImgCaptcha {
             affineTransform.rotate(Math.toRadians(RandomUtil.randomInt(-45, 45)), 0, 0);
             Font rotatedFont = font.deriveFont(affineTransform);
             backgroundGraphics.setFont(rotatedFont);
-            backgroundGraphics.drawString(word, point.getX(), point.getY());
+            backgroundGraphics.drawString(word, Convert.toInt(point.getX()), Convert.toInt(point.getY()));
 
             if ((num - 1) != i) {
                 wordList.add(word);
+                point.setText(word);
                 pointList.add(point);
             }
             i++;
@@ -167,7 +169,7 @@ public class ClickWordCaptcha extends AbstractImgCaptcha {
             }
         }
         y = RandomUtil.randomInt(size, imageHeight - size);
-        return new CaptchaPoint(x, y);
+        return new CaptchaPoint(Convert.toDouble(x), Convert.toDouble(y));
     }
 
     @Data

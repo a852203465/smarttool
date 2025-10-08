@@ -16,14 +16,25 @@ import lombok.NoArgsConstructor;
 public class CaptchaPoint {
 
     /**
+     * 值
+     */
+    private String text;
+
+    /**
      * x坐标
      */
-    private Integer x;
+    private Double x;
 
     /**
      * y坐标
      */
-    private Integer y;
+    private Double y;
+
+    public CaptchaPoint(Double x, Double y) {
+        this.y = y;
+        this.x = x;
+    }
+
 
 
 
