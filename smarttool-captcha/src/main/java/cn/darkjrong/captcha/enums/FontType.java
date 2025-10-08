@@ -26,8 +26,8 @@ public enum FontType {
     Ransom("Ransom"),
     Robot_Teacher("Robot Teacher"),
     Potassium_Scandal("Potassium Scandal"),
-    Arial("Arial"),
-
+    Arial("楷体"),
+    WenQuanZhengHei("文泉驿正黑"),
 
 
 
