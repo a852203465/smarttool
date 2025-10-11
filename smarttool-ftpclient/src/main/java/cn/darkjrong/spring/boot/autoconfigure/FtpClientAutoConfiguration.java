@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("cn.darkjrong.ftpclient")
 @EnableConfigurationProperties(FtpClientProperties.class)
-@ConditionalOnProperty(prefix = "ftp.client", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "stl.ftp.client", name = "enabled", havingValue = "true")
 public class FtpClientAutoConfiguration {
 
     private final FtpClientProperties ftpClientProperties;

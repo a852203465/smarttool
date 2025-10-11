@@ -14,7 +14,7 @@ import java.time.Duration;
  * @date 2022/01/06
  */
 @Data
-@ConfigurationProperties(prefix = "ftp.client")
+@ConfigurationProperties(prefix = "stl.ftp.client")
 public class FtpClientProperties {
 
     /**
